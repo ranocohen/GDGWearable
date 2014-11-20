@@ -2,6 +2,7 @@ package app.wearable.gdg.com.gdgpitcher;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -9,16 +10,27 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.wearable.DataApi;
+import com.google.android.gms.wearable.DataEvent;
+import com.google.android.gms.wearable.DataEventBuffer;
+import com.google.android.gms.wearable.MessageApi;
+import com.google.android.gms.wearable.MessageEvent;
+import com.google.android.gms.wearable.Node;
+import com.google.android.gms.wearable.NodeApi;
+import com.google.android.gms.wearable.Wearable;
 
-public class MainActivity extends ActionBarActivity {
+
+public class MainActivity extends ActionBarActivity
+        {
     WebView webView;
-    Button button;
+    Button button,msg;
     JsHandler js;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         webView = (WebView) findViewById(R.id.web_view);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebViewClient(new Callback());
@@ -28,6 +40,7 @@ public class MainActivity extends ActionBarActivity {
 
 
         button = (Button) findViewById(R.id.right);
+        msg = (Button) findViewById(R.id.msg);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -36,6 +49,10 @@ public class MainActivity extends ActionBarActivity {
         });
 
     }
+
+
+
+
     private class Callback extends WebViewClient {  //HERE IS THE MAIN CHANGE.
 
         @Override
@@ -44,4 +61,5 @@ public class MainActivity extends ActionBarActivity {
         }
 
     }
-}
+
+    }
