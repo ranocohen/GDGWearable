@@ -33,7 +33,7 @@ public class JsHandler
      */
     public void javaFnCall(String jsString) {
 
-        final String webUrl = "javascript:diplayJavaMsg('"+jsString+"')";
+        final String webUrl = "javascript:"+jsString;
         // Add this to avoid android.view.windowmanager$badtokenexception unable to add window
         if(!activity.isFinishing())
             // loadurl on UI main thread
