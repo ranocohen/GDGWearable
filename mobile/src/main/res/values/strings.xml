@@ -9,4 +9,5 @@
     <string name="cancel_text">cancel</string>
     <string name="ok_text">ok</string>
     <string name="app_dialog_title">js title</string>
+    <string name="scan">scan</string>
 </resources>
