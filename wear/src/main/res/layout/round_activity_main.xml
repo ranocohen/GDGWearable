@@ -1,7 +1,7 @@
 <android.support.wearable.view.BoxInsetLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/blue"
+    android:background="#ff444444"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:padding="15dp">
@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:text="HI BITCH"
-            android:textColor="@color/black" />
+            android:textColor="@color/white" />
 
 
         <ImageButton

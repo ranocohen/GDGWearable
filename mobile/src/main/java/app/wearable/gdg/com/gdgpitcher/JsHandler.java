@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.webkit.WebView;
 
-import app.wearable.gdg.com.lecturer.R;
 
 /**
  * Class to handle all calls from JS & from Java too

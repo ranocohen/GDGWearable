@@ -20,7 +20,6 @@ import org.java_websocket.handshake.ServerHandshake;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import app.wearable.gdg.com.lecturer.R;
 
 
 public class MainActivity extends ActionBarActivity {

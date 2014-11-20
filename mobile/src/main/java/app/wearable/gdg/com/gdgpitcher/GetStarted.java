@@ -7,7 +7,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import app.wearable.gdg.com.lecturer.R;
 
 
 public class GetStarted extends ActionBarActivity {
