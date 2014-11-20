@@ -12,7 +12,9 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.github.lzyzsd.circleprogress.DonutProgress;
 
 import org.java_websocket.client.WebSocketClient;
@@ -27,7 +29,7 @@ public class MainActivity extends ActionBarActivity {
     Button button;
     JsHandler js;
     private WebSocketClient mWebSocketClient;
-
+    FloatingActionsMenu fam;
 
     private DonutProgress donutProgress;
 
@@ -36,6 +38,27 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        findViewById(R.id.fab_lost).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "I'm lost", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        findViewById(R.id.fab_takenote).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "note", Toast.LENGTH_SHORT).show();
+            }
+        });
+/*
+        findViewById(R.id.pink_icon).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Clicked pink Floating Action Button", Toast.LENGTH_SHORT).show();
+            }
+        });
+*/
         donutProgress = (DonutProgress) findViewById(R.id.donut_progress);
 
         webView = (WebView) findViewById(R.id.web_view);

@@ -11,6 +11,14 @@
         android:textStyle="bold" android:textSize="50sp" android:gravity="center"
         android:text="@string/dummy_content" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="get started"
+        android:id="@+id/start"
+        android:layout_gravity="center" />
+
+
     <!-- This FrameLayout insets its children based on system windows using
          android:fitsSystemWindows. -->
     <FrameLayout android:layout_width="match_parent" android:layout_height="match_parent"
@@ -27,6 +35,8 @@
                 android:layout_weight="1" android:text="@string/dummy_button" />
 
         </LinearLayout>
+
+
     </FrameLayout>
 
 </FrameLayout>
