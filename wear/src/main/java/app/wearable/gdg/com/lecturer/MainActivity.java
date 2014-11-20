@@ -1,6 +1,13 @@
 package app.wearable.gdg.com.lecturer;
 
 import android.app.Activity;
+import android.graphics.Color;
+import android.graphics.LinearGradient;
+import android.graphics.Shader;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.PaintDrawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.RectShape;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.wearable.view.WatchViewStub;
@@ -76,6 +83,21 @@ public class MainActivity extends Activity implements   MessageApi.MessageListen
                         sendMessage("right");
                     }
                 });
+
+                ShapeDrawable.ShaderFactory sf = new ShapeDrawable.ShaderFactory() {
+                    @Override
+                    public Shader resize(int width, int height) {
+                        LinearGradient lg = new LinearGradient(0, 0, width, height,
+                                new int[]{Color.GREEN, Color.GREEN, Color.RED, Color.RED},
+                                null, Shader.TileMode.REPEAT);
+                        return lg;
+                    }
+                };
+
+                PaintDrawable p=new PaintDrawable();
+                p.setShape(new RectShape());
+                p.setShaderFactory(sf);
+                stub.findViewById(R.id.container).setBackground(p);
             }
         });
 
