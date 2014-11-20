@@ -19,16 +19,21 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String url = getIntent().getExtras().getString("url");
-
-
-
         webView = (WebView) findViewById(R.id.web_view);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebViewClient(new Callback());
-        webView.loadUrl(url );
+        webView.loadUrl("http://slides.com/idannakav/dsdsds/live#/");
 
         js = new JsHandler(this,webView);
+
+
+        button = (Button) findViewById(R.id.right);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                js.javaFnCall("Reveal.right();");
+            }
+        });
 
     }
     private class Callback extends WebViewClient {  //HERE IS THE MAIN CHANGE.
