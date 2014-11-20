@@ -1,6 +1,7 @@
 package app.wearable.gdg.com.gdgpitcher;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -34,6 +35,11 @@ public class ZXingDemo extends Activity implements ZXingScannerView.ResultHandle
 
     @Override
     public void handleResult(Result rawResult) {
+        Intent mIntent = new Intent(this, MainActivity.class);
+        Bundle mBundle = new Bundle();
+        mBundle.putString("url", rawResult.getText());
+        mIntent.putExtras(mBundle);
+        startActivity(mIntent);
         // Do something with the result here
         Log.v(TAG, rawResult.getText()); // Prints scan results
         Log.v(TAG, rawResult.getBarcodeFormat().toString()); // Prints the scan format (qrcode, pdf417 etc.)

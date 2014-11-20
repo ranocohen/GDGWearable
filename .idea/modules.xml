@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/GDGPitcher.iml" filepath="$PROJECT_DIR$/GDGPitcher.iml" />
       <module fileurl="file://$PROJECT_DIR$/GDGWearable.iml" filepath="$PROJECT_DIR$/GDGWearable.iml" />
       <module fileurl="file://$PROJECT_DIR$/mobile/mobile.iml" filepath="$PROJECT_DIR$/mobile/mobile.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mobile_lecturer/mobile_lecturer.iml" filepath="$PROJECT_DIR$/mobile_lecturer/mobile_lecturer.iml" />
       <module fileurl="file://$PROJECT_DIR$/wear/wear.iml" filepath="$PROJECT_DIR$/wear/wear.iml" />
     </modules>
   </component>

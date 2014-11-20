@@ -5,7 +5,7 @@ android {
     buildToolsVersion "21.1.1"
 
     defaultConfig {
-        applicationId "app.wearable.gdg.com.gdgpitcher"
+        applicationId "app.wearable.gdg.com.myapplication"
         minSdkVersion 14
         targetSdkVersion 21
         versionCode 1
@@ -21,12 +21,5 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    wearApp project(':wear')
     compile 'com.android.support:appcompat-v7:21.0.0'
-    compile 'com.google.android.gms:play-services:6.1.11'
-    compile 'me.dm7.barcodescanner:zxing:1.5'
-    compile 'com.github.lzyzsd:circleprogress:1.0.0@aar'
-
-
-
 }
