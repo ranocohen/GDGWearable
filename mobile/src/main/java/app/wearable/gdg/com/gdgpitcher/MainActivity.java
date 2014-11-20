@@ -51,6 +51,9 @@ public class MainActivity extends ActionBarActivity {
 
         js = new JsHandler(this,webView);
 
+        connectWebSocket();
+
+
     }
     private class Callback extends WebViewClient {  //HERE IS THE MAIN CHANGE.
 
