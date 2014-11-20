@@ -1,24 +1,36 @@
-package app.wearable.gdg.com.myapplication;
+package app.wearable.gdg.com.gdgpitcher;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+
+import app.wearable.gdg.com.lecturer.R;
 
 
-public class MainActivity extends ActionBarActivity {
+public class GetStarted extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_get_started);
+
+        findViewById(R.id.btn_get_started).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mIntent = new Intent(getApplicationContext(), ZBarActivity.class);
+                startActivity(mIntent);
+            }
+        });
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_get_started, menu);
         return true;
     }
 

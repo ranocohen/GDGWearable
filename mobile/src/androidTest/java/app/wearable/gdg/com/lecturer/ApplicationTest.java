@@ -1,4 +1,4 @@
-package app.wearable.gdg.com.myapplication;
+package app.wearable.gdg.com.lecturer;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

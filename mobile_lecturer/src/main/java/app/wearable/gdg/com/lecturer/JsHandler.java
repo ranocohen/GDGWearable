@@ -1,11 +1,9 @@
-package app.wearable.gdg.com.gdgpitcher;
+package app.wearable.gdg.com.lecturer;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.webkit.WebView;
-
-import app.wearable.gdg.com.lecturer.R;
 
 /**
  * Class to handle all calls from JS & from Java too
@@ -18,7 +16,7 @@ public class JsHandler
     WebView webView;
 
 
-    public JsHandler(Activity _contxt,WebView _webView) {
+    public JsHandler(Activity _contxt, WebView _webView) {
         activity = _contxt;
         webView = _webView;
     }

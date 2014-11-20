@@ -1,4 +1,4 @@
-package app.wearable.gdg.com.gdgpitcher;
+package app.wearable.gdg.com.lecturer;
 
 /**
  * Created by idanakav on 20/11/14.
@@ -7,15 +7,12 @@ package app.wearable.gdg.com.gdgpitcher;
 
         import android.util.Log;
 
-        import com.google.android.gms.common.ConnectionResult;
         import com.google.android.gms.common.api.GoogleApiClient;
         import com.google.android.gms.wearable.DataEventBuffer;
         import com.google.android.gms.wearable.MessageEvent;
         import com.google.android.gms.wearable.Node;
         import com.google.android.gms.wearable.Wearable;
         import com.google.android.gms.wearable.WearableListenerService;
-
-        import java.util.concurrent.TimeUnit;
 
 
 public class WearService extends WearableListenerService {
