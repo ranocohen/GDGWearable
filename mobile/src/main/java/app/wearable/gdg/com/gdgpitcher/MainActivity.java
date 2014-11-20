@@ -108,7 +108,7 @@ public class MainActivity extends ActionBarActivity {
     private void connectWebSocket() {
         URI uri;
         try {
-            uri = new URI("ws://websockethost:8080");
+            uri = new URI("ws://echo.websocket.org");
         } catch (URISyntaxException e) {
             e.printStackTrace();
             return;
@@ -127,8 +127,9 @@ public class MainActivity extends ActionBarActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        TextView textView = (TextView)findViewById(R.id.messages);
-                        textView.setText(textView.getText() + "\n" + message);
+                        //TextView textView = (TextView)findViewById(R.id.messages);
+                        //textView.setText(textView.getText() + "\n" + message);
+                        Log.i("webservice", message.toString());
                     }
                 });
             }
