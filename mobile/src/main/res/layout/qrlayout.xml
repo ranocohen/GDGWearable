@@ -3,24 +3,9 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
-    <Button
+    android:padding="5dp">
+    <me.dm7.barcodescanner.zbar.ZBarScannerView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/scan"
-        android:onClick="doScan"
-        />
-    <TextView android:id="@+id/format"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dip"
-        android:background="#FF0000FF"
-        />
-    <TextView android:id="@+id/contents"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+        android:layout_height="match_parent"
+        android:id="@+id/scanner_view" />
 </LinearLayout>

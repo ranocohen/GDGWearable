@@ -26,15 +26,6 @@ public class MainActivity extends ActionBarActivity {
 
         js = new JsHandler(this,webView);
 
-
-        button = (Button) findViewById(R.id.right);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                js.javaFnCall("Reveal.right();");
-            }
-        });
-
     }
     private class Callback extends WebViewClient {  //HERE IS THE MAIN CHANGE.
 

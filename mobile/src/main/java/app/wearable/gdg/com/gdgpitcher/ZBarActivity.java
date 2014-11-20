@@ -3,21 +3,25 @@ package app.wearable.gdg.com.gdgpitcher;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 
-import com.google.zxing.Result;
+import me.dm7.barcodescanner.zbar.Result;
+import me.dm7.barcodescanner.zbar.ZBarScannerView;
 
-import me.dm7.barcodescanner.zxing.ZXingScannerView;
+public class ZBarActivity extends ActionBarActivity implements ZBarScannerView.ResultHandler {
 
-public class ZXingDemo extends Activity implements ZXingScannerView.ResultHandler {
+    private ZBarScannerView mScannerView;
+
     private static final String TAG = "ZXINGDemo" ;
-    private ZXingScannerView mScannerView;
 
     @Override
     public void onCreate(Bundle state) {
         super.onCreate(state);
-        mScannerView = new ZXingScannerView(this);   // Programmatically initialize the scanner view
-        setContentView(mScannerView);                // Set the scanner view as the content view
+        setContentView(R.layout.qrlayout);
+        //mScannerView = new ZBarScannerView(this);    // Programmatically initialize the scanner view
+        mScannerView = (ZBarScannerView) findViewById(R.id.scanner_view);
+        //setContentView(mScannerView);                // Set the scanner view as the content view
     }
 
     @Override
@@ -37,11 +41,12 @@ public class ZXingDemo extends Activity implements ZXingScannerView.ResultHandle
     public void handleResult(Result rawResult) {
         Intent mIntent = new Intent(this, MainActivity.class);
         Bundle mBundle = new Bundle();
-        mBundle.putString("url", rawResult.getText());
+        mBundle.putString("url", rawResult.getContents());
         mIntent.putExtras(mBundle);
         startActivity(mIntent);
         // Do something with the result here
-        Log.v(TAG, rawResult.getText()); // Prints scan results
+        Log.v(TAG, rawResult.getContents()); // Prints scan results
         Log.v(TAG, rawResult.getBarcodeFormat().toString()); // Prints the scan format (qrcode, pdf417 etc.)
     }
+
 }
