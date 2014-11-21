@@ -42,7 +42,7 @@
             android:id="@+id/fab_takenote"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            fab:fab_icon="@drawable/ic_fab_star"
+            fab:fab_icon="@drawable/note"
             fab:fab_colorNormal="@color/white"
             fab:fab_colorPressed="@color/white_pressed"/>
 
@@ -50,7 +50,7 @@
             android:id="@+id/fab_lost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            fab:fab_icon="@drawable/ic_fab_star"
+            fab:fab_icon="@drawable/help"
             fab:fab_colorNormal="@color/white"
             fab:fab_colorPressed="@color/white_pressed"/>
 
