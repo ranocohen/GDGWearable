@@ -16,6 +16,8 @@ import com.github.lzyzsd.circleprogress.DonutProgress;
 
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -74,7 +76,6 @@ public class MainActivity extends ActionBarActivity {
 
         connectWebSocket();
 
-
     }
     private class Callback extends WebViewClient {  //HERE IS THE MAIN CHANGE.
 
@@ -106,7 +107,7 @@ public class MainActivity extends ActionBarActivity {
     private void connectWebSocket() {
         URI uri;
         try {
-            uri = new URI("ws://echo.websocket.org");
+            uri = new URI("ws://132.72.234.215:9000/viewerWS");
         } catch (URISyntaxException e) {
             e.printStackTrace();
             return;
@@ -116,7 +117,16 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onOpen(ServerHandshake serverHandshake) {
                 Log.i("Websocket", "Opened");
-                mWebSocketClient.send("Hello from " + Build.MANUFACTURER + " " + Build.MODEL);
+                JSONObject object = new JSONObject();
+                try {
+                    object.put("type", "clearhands");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(object);
+                mWebSocketClient.send(object.toString());
+                Log.i("Webservice", object.toString());
+
             }
 
             @Override
