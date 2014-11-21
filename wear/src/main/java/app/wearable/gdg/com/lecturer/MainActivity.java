@@ -35,6 +35,7 @@ public class MainActivity extends Activity implements   MessageApi.MessageListen
     private GoogleApiClient mGoogleApiClient;
     private Node peerNode;
     private ImageButton right,left;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,9 +88,10 @@ public class MainActivity extends Activity implements   MessageApi.MessageListen
                 ShapeDrawable.ShaderFactory sf = new ShapeDrawable.ShaderFactory() {
                     @Override
                     public Shader resize(int width, int height) {
-                        LinearGradient lg = new LinearGradient(0, 0, width, height,
+                        LinearGradient lg = new LinearGradient(width/2, 0, width/2, height,
                                 new int[]{Color.GREEN, Color.GREEN, Color.RED, Color.RED},
-                                null, Shader.TileMode.REPEAT);
+                                new float[] {
+                                        0, 0.45f, 0.47f, 1 }, Shader.TileMode.REPEAT);
                         return lg;
                     }
                 };

@@ -14,11 +14,21 @@ package app.wearable.gdg.com.lecturer;
         import com.google.android.gms.wearable.Wearable;
         import com.google.android.gms.wearable.WearableListenerService;
 
+        import org.java_websocket.client.WebSocketClient;
+        import org.java_websocket.handshake.ServerHandshake;
+        import org.json.JSONException;
+        import org.json.JSONObject;
+
+        import java.net.URI;
+        import java.net.URISyntaxException;
+
 
 public class WearService extends WearableListenerService {
 
     Node peerNode;
     GoogleApiClient googleApiClient;
+    private WebSocketClient mWebSocketClient;
+    URI uri;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -28,6 +38,35 @@ public class WearService extends WearableListenerService {
                 .build();
         googleApiClient.connect();
 
+        try {
+            uri = new URI("ws://132.72.234.215:9000/deckWS?p=http://slides.com/idannakav/slidewear/live#/");
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        mWebSocketClient = new WebSocketClient(uri) {
+            @Override
+            public void onOpen(ServerHandshake serverHandshake) {
+                Log.i("Websocket", "Opened");
+
+            }
+
+            @Override
+            public void onMessage(String s) {
+                        Log.i("webservice", s);
+
+            }
+
+            @Override
+            public void onClose(int i, String s, boolean b) {
+                Log.i("Websocket", "Closed " + s);
+            }
+
+            @Override
+            public void onError(Exception e) {
+                Log.i("Websocket", "Error " + e.getMessage());
+            }
+        };
+        mWebSocketClient.connect();
     }
 
 
@@ -50,7 +89,13 @@ public class WearService extends WearableListenerService {
         super.onMessageReceived(messageEvent);
         Log.i(WearService.class.getSimpleName(), "WEAR Message " + messageEvent.getPath());
 
-
+        JSONObject object = new JSONObject();
+        try {
+            object.put("type", "swipe");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        mWebSocketClient.send(object.toString());
         // Send the RPC
 
         String blat= "blat";
