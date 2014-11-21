@@ -10,9 +10,11 @@ import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RectShape;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.wearable.view.WatchViewStub;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -26,6 +28,7 @@ import com.google.android.gms.wearable.MessageEvent;
 import com.google.android.gms.wearable.Node;
 import com.google.android.gms.wearable.NodeApi;
 import com.google.android.gms.wearable.Wearable;
+import com.google.gson.Gson;
 
 public class MainActivity extends Activity implements   MessageApi.MessageListener,
         GoogleApiClient.ConnectionCallbacks
@@ -35,7 +38,11 @@ public class MainActivity extends Activity implements   MessageApi.MessageListen
     private GoogleApiClient mGoogleApiClient;
     private Node peerNode;
     private ImageButton right,left;
-
+    private ViewGroup container;
+    int currentPage;
+    private TextView timer;
+     long seconds;
+    int totalPages;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,36 +77,54 @@ public class MainActivity extends Activity implements   MessageApi.MessageListen
 
                 left = (ImageButton) stub.findViewById(R.id.left);
                 right = (ImageButton) stub.findViewById(R.id.right);
-
+                left.setVisibility(View.GONE);
                 left.setOnClickListener(new View.OnClickListener() {
+
+
                     @Override
                     public void onClick(View v) {
-                        sendMessage("left");
+                        container.setBackgroundColor(getResources().getColor(R.color.g1));
+                        if(currentPage >1) {
+                            sendMessage("left");
+                            currentPage--;
+                            mTextView.setText(""+currentPage+"/"+totalPages);
+                            right.setVisibility(View.VISIBLE);
+                            if(currentPage == 1)
+                                left.setVisibility(View.GONE);
+                        }
                     }
                 });
 
                 right.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        sendMessage("right");
+                        container.setBackgroundColor(getResources().getColor(R.color.g1));
+                        if(currentPage <totalPages) {
+                            sendMessage("right");
+                            currentPage++;
+                            mTextView.setText(""+currentPage+"/"+totalPages);
+                            left.setVisibility(View.VISIBLE);
+                            if(currentPage == totalPages)
+                                right.setVisibility(View.GONE);
+                        }
+
                     }
                 });
 
-                ShapeDrawable.ShaderFactory sf = new ShapeDrawable.ShaderFactory() {
-                    @Override
-                    public Shader resize(int width, int height) {
-                        LinearGradient lg = new LinearGradient(width/2, 0, width/2, height,
-                                new int[]{Color.GREEN, Color.GREEN, Color.RED, Color.RED},
-                                new float[] {
-                                        0, 0.45f, 0.47f, 1 }, Shader.TileMode.REPEAT);
-                        return lg;
-                    }
-                };
+                container = (ViewGroup) stub.findViewById(R.id.container);
 
-                PaintDrawable p=new PaintDrawable();
-                p.setShape(new RectShape());
-                p.setShaderFactory(sf);
-                stub.findViewById(R.id.container).setBackground(p);
+/*                new CountDownTimer(300000000, 1000) {
+
+                    public void onTick(long millisUntilFinished) {
+                        seconds++;
+                        timer.setText(""+seconds);
+                    }
+
+                    public void onFinish() {
+                        timer.setText("done!");
+                    }
+                }.start();*/
+
             }
         });
 
@@ -214,12 +239,7 @@ public class MainActivity extends Activity implements   MessageApi.MessageListen
          runOnUiThread(new Runnable() {
              @Override
              public void run() {
-                 if(messageEvent.getPath().endsWith("connected")){
-
-                 }
-                 else{
-
-                 }
+               parseMessage(messageEvent.getPath());
              }
          });
 
@@ -237,12 +257,52 @@ public class MainActivity extends Activity implements   MessageApi.MessageListen
 
      @Override
      public void onConnectionSuspended(int i) {
+
      }
 
 
+private void setBackground(int hands,int total) {
+    final float from = (float)hands/(float)total;
+    ShapeDrawable.ShaderFactory sf = new ShapeDrawable.ShaderFactory() {
+        @Override
+        public Shader resize(int width, int height) {
+            LinearGradient lg = new LinearGradient(width/2, 0, width/2, height,
+                    new int[]{getResources().getColor(R.color.r1),
+                            getResources().getColor(R.color.r2),
+                            getResources().getColor(R.color.g1),
+                            getResources().getColor(R.color.g2)},
+                    new float[] {
+                            0, from, from+0.01f, 1 }, Shader.TileMode.REPEAT);
+            return lg;
+        }
+    };
+
+    PaintDrawable p=new PaintDrawable();
+    p.setShape(new RectShape());
+    p.setShaderFactory(sf);
+    container.setBackground(p);
+    container.invalidate();
+}
 
 
+     /** ASSUMING MSG IS TAG/VALUE **/
+private void parseMessage(String msg) {
+    String[] p = msg.split("//");
+    if(p[0].equals("totalPages")) {
+        currentPage = 1;
+        totalPages = Integer.parseInt(p[1]);
+        mTextView.setText(""+currentPage+"/"+totalPages);
+    }
 
+
+    if(p[0].equals("hands")) {
+        Gson gson = new Gson();
+        Hands hands = gson.fromJson(p[1], Hands.class);
+        setBackground(hands.hands,hands.total);
+    }
+
+
+}
 
 
 }

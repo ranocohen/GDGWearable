@@ -31,6 +31,7 @@ public class WearService extends WearableListenerService {
     URI uri;
     @Override
     public void onCreate() {
+
         super.onCreate();
         Log.i(WearService.class.getSimpleName(), "WEAR create");
         googleApiClient=  new GoogleApiClient.Builder(this)
@@ -47,7 +48,13 @@ public class WearService extends WearableListenerService {
             @Override
             public void onOpen(ServerHandshake serverHandshake) {
                 Log.i("Websocket", "Opened");
-
+                JSONObject object = new JSONObject();
+                try {
+                    object.put("type", "clearhands");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                mWebSocketClient.send(object.toString());
             }
 
             @Override
@@ -73,6 +80,7 @@ public class WearService extends WearableListenerService {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        mWebSocketClient.close();
         Log.i(WearService.class.getSimpleName(), "WEAR destroy");
     }
 
@@ -89,13 +97,7 @@ public class WearService extends WearableListenerService {
         super.onMessageReceived(messageEvent);
         Log.i(WearService.class.getSimpleName(), "WEAR Message " + messageEvent.getPath());
 
-        JSONObject object = new JSONObject();
-        try {
-            object.put("type", "swipe");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        mWebSocketClient.send(object.toString());
+
         // Send the RPC
 
         String blat= "blat";

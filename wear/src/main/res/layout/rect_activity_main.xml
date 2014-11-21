@@ -4,23 +4,39 @@
     android:id="@+id/container"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
+    android:background="@color/g1"
     android:padding="15dp">
 
-    <FrameLayout
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="5dp"
-        app:layout_box="all">
+        android:layout_height="match_parent">
 
         <TextView
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:padding="16dp"
             android:id="@+id/text"
             android:gravity="center"
             android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:text="HELLO BITCHES"
+            android:layout_width="wrap_content"
+            android:text="Welcome"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:layout_below="@+id/text"
+            android:layout_centerHorizontal="true"
+            android:padding="16dp"
+            android:id="@+id/timetext"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
             android:textColor="@color/white" />
 
         <ImageButton
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:padding="20dp"
             android:id="@+id/left"
             android:tint="@color/white"
             android:layout_gravity="bottom|start"
@@ -31,6 +47,9 @@
             />
 
         <ImageButton
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:padding="20dp"
             android:id="@+id/right"
             android:tint="@color/white"
             android:background="@null"
@@ -39,5 +58,5 @@
             android:layout_height="50dp"
             android:layout_width="50dp"
             />
-    </FrameLayout>
+    </RelativeLayout>
 </android.support.wearable.view.BoxInsetLayout>
